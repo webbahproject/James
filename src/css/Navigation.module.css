@@ -1,0 +1,35 @@
+.root {
+	flex-grow: 1;
+}
+
+.header {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.menu {
+	font-family: 'Fira Sans Condensed' !important;
+	margin-left: 20px !important;
+	margin-right: 20px !important;
+	font-size: 16px !important;
+}
+
+.menu:hover {
+	color: yellow !important;
+	font-size: 18px !important;
+	font-weight: 800 !important;
+	-webkit-transition: font 0.1s ease;
+	-moz-transition: font 0.1s ease;
+	-o-transition: font 0.1s ease;
+	-ms-transition: font 0.1s ease;
+}
+
+.active {
+	color: #F2F5A9 !important;
+	font-weight: 800 !important;
+}
+
+.title {
+	flex-grow: 1;
+	cursor: pointer;
+}
