@@ -18,7 +18,7 @@ import styles from './../css/AboutMe.module.css';
 const Body = props => {
 
 	return (
-		<Grid item xs={12} container direction="row" className={styles.root}>
+		<Grid container direction="row" className={styles.root}>
 			<GridSpacer height="80" />
 			<Grid item xs={12}>
 				<ParagraphWithImageAndTitle />

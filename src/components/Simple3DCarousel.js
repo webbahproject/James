@@ -107,23 +107,23 @@ class Simple3DCarousel extends React.Component {
 		slide.forEach((slid,index)=> {
 			if (slid.class.includes("preactivede") ) {
 				slid.class ='slider-single proactivede';
-				slid.element = <img key={slid.obj.title} alt="" src={slid.obj.imgUrl} title={slid.obj.title} />
 			}
 			if (slid.class.includes("preactive")) {
 				slid.class = 'slider-single preactivede';
-				slid.element = <img key={slid.obj.title} alt="" src={slid.obj.imgUrl} title={slid.obj.title} />
 			}
 
-			if (slid.class.includes("active") && !slid.class.includes("preactivede") && !slid.class.includes("preactive") && !slid.class.includes("proactive")) {
-				slid.element = <img id={slid.obj.appender} key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} onClick={() => this.goToDetails(slid.obj.appender)} />
-			}
+			slid.element = <img key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} />
 		});
 
 		preactiveSlide.class = 'slider-single preactive';
 		activeSlide.class = 'slider-single active';
 		proactiveSlide.class = 'slider-single proactive';
+
+		// Make only active slide clickable
+		activeSlide.element = <img key={activeSlide.obj.title} alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} onClick={() => this.goToDetails(activeSlide.obj.appender) } />;
+
 		this.setState((prevState, props) => {
-		  return {slides:slide,slideCurrent}
+		  return { slides : slide, slideCurrent}
 		});
 		if(document.getElementsByClassName("slider-single active").length > 0) {
 			setTimeout(()=> {
@@ -162,23 +162,23 @@ class Simple3DCarousel extends React.Component {
 
 		slide.forEach((slid,index)=> {
 			if (slid.class.includes("preactivede") ) {
-				slid.class ='slider-single proactivede';
-				slid.element = <img key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} />
+				slid.class ='slider-single preactivede';
 			}
 
-			if (slid.class.includes("preactive")) {
-				slid.class = 'slider-single preactivede';
-				slid.element = <img key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} />
+			if (slid.class.includes("proactive")) {
+				slid.class = 'slider-single proactivede';
 			}
 
-			if (slid.class.includes("active")) {
-				slid.element = <img id={slid.obj.appender} key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} onClick={() => this.goToDetails(slid.obj.appender)} />
-			}
+			slid.element = <img key={slid.obj.title} alt={slid.obj.title} src={slid.obj.imgUrl} title={slid.obj.title} />
 		});
 
 		preactiveSlide.class ='slider-single preactive';
 		activeSlide.class = 'slider-single active';
 		proactiveSlide.class = 'slider-single proactive';
+
+		// Make only active slide clickable
+		activeSlide.element = <img key={activeSlide.obj.title} alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} onClick={() => this.goToDetails(activeSlide.obj.appender) } />;
+
 		this.setState((prevState, props) => {
 		  return {slides:slide,slideCurrent}
 		});
@@ -196,7 +196,8 @@ class Simple3DCarousel extends React.Component {
 	}
 
 	goToDetails = key => {
-		console.log('Testing method here for goToDetails ::: ', key);
+		console.log('Testing method here for goToDetails ::: ', key, this.props.history, this.props.path);
+		this.props.history.push(this.props.path + '/' + key);
 	}
 
 	render() {

@@ -1,5 +1,5 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import {
 	Grid
 } from '@material-ui/core';
@@ -10,7 +10,8 @@ import {
 	New3DCarousel
 } from './../components';
 import {
-	Footer
+	Footer,
+	CarDetail
 } from '.';
 import styles from './../css/AboutMe.module.css';
 
@@ -25,29 +26,26 @@ const testData = [
 const CarInfo = props => {
 	const {} = props;
 	const history = useHistory();
+	const location = useLocation();
+	const { pathname } = location;
+	const isTypePage = useRouteMatch('/car/:brand/:type');
+	const [open, setOpen] = useState(false);
 
-	const goToDetail = appender => {
-		console.log('Let me see what is appender ::: ', appender);
-	}
+	console.log('Can i see what is location ::: ', location, location.state);
 
-	const CreateImgSlides = () => {
-		let arr = [];
-
-		testData.map(obj => {
-			arr.push(<img key={obj.title} alt="" src={obj.imgUrl} title={obj.title} />);
-		});
-
-		return arr;
-	}
+	useEffect(() => {
+		setOpen(isTypePage && isTypePage.isExact || false);
+	}, [location]);
 
 	return (
-		<Grid item xs={12} container direction="row" className={styles.root}>
+		<Grid container direction="row" className={styles.root}>
 			<GridSpacer height="80" />
-			<Simple3DCarousel slides={testData} />
+			<Simple3DCarousel slides={testData} history={history} path={pathname} />
 			<GridSpacer height="30" />
 			<Grid item xs={12} container justify="center">
 				<PureParagraph />
 			</Grid>
+			<CarDetail />
 			<Footer />
 		</Grid>
 	);
