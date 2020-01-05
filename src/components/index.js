@@ -9,3 +9,8 @@ export { default as GridSpacer } from './GridSpacer';
 export { default as Simple3DCarousel } from './Simple3DCarousel';
 export { default as New3DCarousel } from './New3DCarousel';
 export { default as SimpleTable } from './SimpleTable';
+export { default as VerticalSpacer } from './VerticalSpacer';
+
+/* Form components */
+export { default as FormGenerator } from './FormGenerator';
+export { default as SimpleInput } from './FormInput';

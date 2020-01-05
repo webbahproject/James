@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Button, Modal, Typography } from '@material-ui/core';
-import { Cars } from './../utils/Utils';
-import { SimpleTable } from './../components';
+import { Grid, Button, Modal, Typography, IconButton, Tooltip } from '@material-ui/core';
+import { ChevronLeft } from '@material-ui/icons';
+import { Cars, Form } from './../utils/Utils';
+import { SimpleTable, VerticalSpacer, FormGenerator } from './../components';
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
@@ -23,17 +24,22 @@ const styles = theme => ({
   popheader: {
   	height: 'auto',
   	paddingTop: 20,
-  	paddingBottom: 20,
-  	paddingLeft: '10%'
+  	paddingBottom: 20
   },
   content: {
   	maxHeight: 400, 
   	overflowY: 'scroll',
+  	paddingLeft: '7%',
+  	paddingRight: '7%'
   },
   popcontent: {
   	height: 'auto',
   	paddingTop: 20,
   	paddingBottom: 40
+  },
+  description: {
+  	color: 'rgba(255, 255, 255, 0.6)',
+  	fontWeight: 200
   },
   popfooter: {
   	height: 'auto',
@@ -41,8 +47,40 @@ const styles = theme => ({
   	paddingBottom: 10,
   	backgroundColor: 'rgba(255, 255, 255, 0.3)'
   },
-  footerlabel: {
-
+  form: {
+  	height: windowHeight * 0.9
+  },
+  intro: {
+  	backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  	paddingTop: 15,
+  	paddingBottom: 15,
+  	paddingLeft: '7%',
+  	paddingRight: '7%'
+  },
+  formreturn: {
+  	paddingLeft: '7%',
+  	paddingRight: '7%'
+  },
+  formcontent: {
+  	maxHeight: windowHeight * 0.9 - 100,
+  	overflow: 'hidden',
+  	overflowY: 'scroll'
+  },
+  action: {
+  	paddingRight: '7%'
+  },
+  footer: {
+  	backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  	paddingTop: 5,
+  	paddingBottom: 5,
+  	paddingLeft: '7%',
+  	paddingRight: '7%'
+  },
+  iconbtn: {
+  	backgroundColor: 'rgba(255, 255, 255, 0.4)',
+  	'&:hover': {
+  		backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  	}
   }
 });
 
@@ -57,16 +95,106 @@ const getModalStyle = () => {
   };
 }
 
-const CarDetail = props => {
+const InfoDisplay = props => {
 	const { classes, car = {} } = props;
-	const { imgUrl = '', appender = '', title = '' } = car; 
+	const { imgUrl = '', appender = '', title = '', description = '' } = car; 
+	const tabledata = null;
+
+	return (
+		<Grid container direction="row">
+    	<Grid item xs={12}>
+    		<div style={{ backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: 200, width: '100%' }} /> 
+    	</Grid>
+    	<VerticalSpacer height="20" />
+    	<Grid item xs={12} container className={classes.content}>
+    		<Grid item xs={12} container alignItems="center" className={classes.popheader}>
+      		<Typography variant="h5" className={classes.bold}>
+      			{title}
+      		</Typography>
+      	</Grid>
+      	<Grid item xs={12} container alignItems="center">
+      		<Typography variant="body2" className={classes.description}>
+      			{description}
+      		</Typography>
+      	</Grid>
+      	<Grid item xs={12} container justify="center" className={classes.popcontent}>
+      		<SimpleTable data={{ tableheader: [], tablecontent: null }}  />
+      	</Grid>
+    	</Grid>
+    </Grid>
+	);
+}
+
+/* // Custom hooks for handling form */
+const useFormHandler = f => {
+	const [form, setForm] = useState(f);
+
+	const changeHandler = (key, v) => {
+		setForm({ ...form, [key]: v });
+	}
+
+	return { form, changeHandler };
+}
+
+const FormDisplay = props => {
+	const { classes, displaySetter } = props;
+	const titles = Object.keys(Form);
+	const Pemohon = useFormHandler(Form[titles[0]]);
+	const Penjamin = useFormHandler(Form[titles[1]]);
+	const Perujuk = useFormHandler(Form[titles[2]]);
+
+	const description = 'Bagi membolehkan pihak Careta2u memeriksa kelayakan anda, sila isikan borang di bawah, dan Careta2u akan dengan secepatnya memproses permohonan anda dan memberitahu anda samada layak untuk memohon ataupun tidak.'
+
+	/* Form submitter */
+	const submit = () => {};
+
+	/* Return handler */
+	const returnToInfo = () => {
+		displaySetter(false);
+	}
+
+	return (
+		<Grid container direction="row" className={classes.form}>
+			<Grid item xs={12} className={classes.intro}>
+				<Typography variant="caption" align="justify">{description}</Typography>
+			</Grid>
+			<Grid item xs={12} container direction="row" className={classes.formcontent}>
+				<VerticalSpacer height="25" />
+				<Grid item xs={12} className={classes.formreturn}>
+					<IconButton className={classes.iconbtn} onClick={returnToInfo}>
+						<Tooltip title="Kembali ke info">
+							<ChevronLeft />
+						</Tooltip>
+					</IconButton>
+				</Grid>
+				<VerticalSpacer height="25" />
+				<FormGenerator config={{ formTitle: titles[0], form: Pemohon.form, formSetter: Pemohon.changeHandler }} />
+				<VerticalSpacer height="40" />
+				<FormGenerator config={{ formTitle: titles[1], form: Penjamin.form, formSetter: Penjamin.changeHandler }} />
+				<VerticalSpacer height="40" />
+				<FormGenerator config={{ formTitle: titles[2], form: Perujuk.form, formSetter: Perujuk.changeHandler }} />
+				<VerticalSpacer height="40" />
+				<Grid item xs={12} container className={classes.action} alignItems="center" justify="flex-end">
+					<Button variant="contained" color="primary" onClick={submit}>Hantar Kepada Careta2u!</Button>
+				</Grid>
+				<VerticalSpacer height="40" />
+			</Grid>
+			<Grid item xs={12} className={classes.footer} container justify="center">
+				<Typography variant="caption">Careta2u</Typography>
+			</Grid>
+		</Grid>
+	);
+}
+
+const CarDetail = props => {
+	const { classes } = props;
   const [open, setOpen] = useState(false);
+  const [isForm, setIsForm] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const isMatch = useRouteMatch('/car/:brand/:type');
   const location = useLocation();
   const history = useHistory();
-  const tabledata = null;
-
+  
   const handleClose = () => {
     setOpen(false);
     history.goBack();
@@ -84,24 +212,8 @@ const CarDetail = props => {
       aria-describedby="simple-modal-description"
     >
     	<div style={modalStyle} className={classes.paper}>
-	      <Grid container direction="row">
-	      	<Grid item xs={12}>
-	      		<div style={{ backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: 200, width: '100%' }} /> 
-	      	</Grid>
-	      	<Grid item xs={12} container className={classes.content}>
-	      		<Grid item xs={12} container alignItems="center" className={classes.popheader}>
-		      		<Typography variant="h5" className={classes.bold}>
-		      			{title}
-		      		</Typography>
-		      	</Grid>
-		      	<Grid item xs={12} container justify="center" className={classes.popcontent}>
-		      		<SimpleTable data={{ tableheader: [], tablecontent: null }}  />
-		      	</Grid>
-	      	</Grid>
-	      	<Grid item xs={12} container justify="center" className={classes.popfooter}>
-	      		<Typography variant="caption" className={classes.footerlabel}>Careta2u</Typography>
-	      	</Grid>
-	      </Grid>
+	      { !isForm && <InfoDisplay {...props} /> }
+	      { isForm && <FormDisplay {...props} displaySetter={setIsForm} /> }
       </div>
     </Modal>
   );
