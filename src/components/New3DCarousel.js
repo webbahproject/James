@@ -1,7 +1,6 @@
 /* Imported out from 3D-react-carousel */
 
-import React, { useState, useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import isEqual from 'react-fast-compare';

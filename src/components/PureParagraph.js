@@ -1,14 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
 import {
 	Grid,
-	Avatar,
 	Typography
 } from '@material-ui/core';
-import {
-	GridSpacer
-} from '.';
+import {} from '.';
 import styles from './../css/ParagraphWithImageAndTitle.module.css';
 
 const mock = {

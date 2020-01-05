@@ -1,11 +1,8 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import _ from 'lodash';
 import { 
 	AppBar,
 	Toolbar,
-	IconButton, 
-	Typography,
 	Button
 } from '@material-ui/core';
 import styles from './../css/Navigation.module.css';

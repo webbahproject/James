@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useMemo, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import _ from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Button, Modal, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { SimpleInput } from '.';
-import { Form } from './../utils/Utils';
 import { VerticalSpacer } from './../components';
 
 const windowWidth = window.innerWidth;

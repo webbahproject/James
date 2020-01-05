@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import _ from 'lodash';
-import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Button, Modal, Typography, IconButton, Tooltip } from '@material-ui/core';
 import { ChevronLeft, Close } from '@material-ui/icons';
-import { Cars, CarsPricing, Form } from './../utils/Utils';
+import { CarsPricing, Form } from './../utils/Utils';
 import { SimpleTable, VerticalSpacer, FormGenerator } from './../components';
 
 const windowWidth = window.innerWidth;
@@ -218,7 +217,6 @@ const CarDetail = props => {
   const [type, setType] = useState('');
   const [modalStyle] = useState(getModalStyle);
   const isMatch = useRouteMatch('/car/:brand/:type');
-  const location = useLocation();
   const history = useHistory();
   
   const handleClose = () => {
@@ -227,7 +225,7 @@ const CarDetail = props => {
   };
 
   useEffect(() => {
-  	setOpen(isMatch && isMatch.isExact || false);
+  	setOpen(( isMatch && isMatch.isExact ) || false);
   }, [isMatch]);
 
   return (

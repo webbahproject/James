@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 
 const GridSpacer = props => {
-	const { classes, height } = props;
+	const { height } = props;
 
 	return (
 		<Grid item xs={12} container direction="row" justify="center">

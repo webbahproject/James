@@ -1,18 +1,11 @@
 import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
 import { useHistory } from 'react-router-dom';
-import {
-	Grid
-} from '@material-ui/core';
+import {} from '@material-ui/core';
 import Slider from 'react-animated-slider-2';
-import BackgroundSlider from 'react-background-slider';
-import styles from './../css/Slider.module.css';
 import 'react-animated-slider-2/build/horizontal.css';
 import 'normalize.css/normalize.css';
 import './../css/Slider.Animations.css';
 import './../css/Slider.Styles.css';
-
 
 const content = [
 	{

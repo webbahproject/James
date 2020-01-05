@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import {
 	Grid
@@ -7,8 +6,7 @@ import {
 import {
 	PureParagraph,
 	GridSpacer,
-	Simple3DCarousel,
-	New3DCarousel
+	Simple3DCarousel
 } from './../components';
 import {
 	Footer,
@@ -18,7 +16,6 @@ import { Cars } from './../utils/Utils';
 import styles from './../css/AboutMe.module.css';
 
 const CarInfo = props => {
-	const {} = props;
 	const [data, setData] = useState([]);
 	const history = useHistory();
 	const location = useLocation();

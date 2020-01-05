@@ -1,7 +1,6 @@
 // Components combiner
 
 export { default as AnimatedSlider } from './AnimatedSlider';
-export { default as SimpleCarousel } from './SimpleCarousel';
 export { default as ParagraphWithImageAndTitle } from './ParagraphWithImageAndTitle';
 export { default as ParagraphWithTitle } from './ParagraphWithTitle';
 export { default as PureParagraph } from './PureParagraph';

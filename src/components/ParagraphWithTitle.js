@@ -1,9 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
 import {
 	Grid,
-	Avatar,
 	Typography
 } from '@material-ui/core';
 import {

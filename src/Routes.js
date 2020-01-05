@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { Switch, Route, useLocation, useRouteMatch } from 'react-router-dom';
-import { useTransition, animated } from 'react-spring';
 import {
   Navigation,
   Dashboard,
   AboutMe,
-  Footer,
   CarInfo,
   CarDetail
 } from './pages';
@@ -18,7 +16,7 @@ const Routes = props => {
   const location = useLocation();
   const isMatch = useRouteMatch('/car/:brand/:type');
   let background = location.state && location.state.background;
-  let car = isMatch && _.find(Cars[isMatch.params.brand], ['appender', isMatch.params.type]) || null;
+  let car = ( isMatch && _.find(Cars[isMatch.params.brand], ['appender', isMatch.params.type]) ) || null;
 
   return (
     <div className={styles.root}>
