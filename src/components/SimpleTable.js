@@ -6,7 +6,8 @@ import {
   TableHead,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  Button
 } from '@material-ui/core';
 
 const styles = theme => ({
@@ -31,18 +32,9 @@ const styles = theme => ({
   }
 });
 
-const testData = {
-  tableheader: ['Column 1', 'Column 2', 'Column 3', 'Column 4', 'Column 5'],
-  tablecontent: [
-    { id: 1, tablecells: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 2, tablecells: ['V1', 'V2', 'V3', 'V4', 'V5'] },
-    { id: 3, tablecells: ['V1', 'V2', 'V3', 'V4', 'V5'] }    
-  ]
-};
-
 const SimpleTable = props => {
-  const { classes, data = {} } = props;
-	const { tableheader = [], tablecontent = [] } = testData;
+  const { classes, config = {} } = props;
+	const { tableheader = [], tablecontent = [], clickHandler = () => {} } = config;
 
 	return (
     <Paper className={classes.paper}>
@@ -61,9 +53,24 @@ const SimpleTable = props => {
             Boolean(tablecontent.length) && tablecontent.map(row => (
               <TableRow key={row.id} className={classes.tablerow}>
                 {
-                  (row.tablecells).map(cell => (
-                     <TableCell className={classes.tablebodycell}>{cell}</TableCell>
-                  ))
+                  (row.tablecells).map(cell => {
+                    switch(typeof cell){
+                      case 'string':
+                      return (
+                        <TableCell className={classes.tablebodycell}>{cell}</TableCell> 
+                      );
+
+                      case 'object':
+                      return (
+                        <TableCell className={classes.tablebodycell}>
+                          <Button variant="contained" color="secondary" onClick={evt => clickHandler(cell.type)}>Mohon!</Button>
+                        </TableCell> 
+                      );
+
+                      default:
+                      return null;
+                    }
+                  })
                 }
               </TableRow>
             ))

@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Button, Modal, Typography, IconButton, Tooltip } from '@material-ui/core';
-import { ChevronLeft } from '@material-ui/icons';
-import { Cars, Form } from './../utils/Utils';
+import { ChevronLeft, Close } from '@material-ui/icons';
+import { Cars, CarsPricing, Form } from './../utils/Utils';
 import { SimpleTable, VerticalSpacer, FormGenerator } from './../components';
 
 const windowWidth = window.innerWidth;
@@ -81,6 +81,12 @@ const styles = theme => ({
   	'&:hover': {
   		backgroundColor: 'rgba(255, 255, 255, 0.7)',
   	}
+  },
+  topright: {
+  	position: 'absolute',
+  	top: 10,
+  	right: 10,
+  	padding: 7
   }
 });
 
@@ -96,14 +102,26 @@ const getModalStyle = () => {
 }
 
 const InfoDisplay = props => {
-	const { classes, car = {} } = props;
+	const { classes, car = {}, displaySetter, formSetter, typeSetter } = props;
 	const { imgUrl = '', appender = '', title = '', description = '' } = car; 
-	const tabledata = null;
+
+	const tableheader = ['Model', 'Harga', 'Deposit (10%)', 'Loan (90%)', '5 tahun', '7 tahun', '9 tahun', 'Loan penuh', ''];
+
+	const clickHandler = model => {
+		typeSetter(model);
+		displaySetter(true);
+	}
 
 	return (
 		<Grid container direction="row">
     	<Grid item xs={12}>
-    		<div style={{ backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: 200, width: '100%' }} /> 
+    		<div style={{ position: 'relative', backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: 200, width: '100%' }}>
+    			<IconButton className={` ${classes.iconbtn} ${classes.topright} `} onClick={formSetter}>
+						<Tooltip title="Tutup popper">
+							<Close style={{ fontSize: 12 }} />
+						</Tooltip>
+					</IconButton>
+    		</div> 
     	</Grid>
     	<VerticalSpacer height="20" />
     	<Grid item xs={12} container className={classes.content}>
@@ -118,14 +136,14 @@ const InfoDisplay = props => {
       		</Typography>
       	</Grid>
       	<Grid item xs={12} container justify="center" className={classes.popcontent}>
-      		<SimpleTable data={{ tableheader: [], tablecontent: null }}  />
+      		<SimpleTable config={{ tableheader, tablecontent: CarsPricing[appender], clickHandler }}  />
       	</Grid>
     	</Grid>
     </Grid>
 	);
 }
 
-/* // Custom hooks for handling form */
+/* Custom hooks for handling form */
 const useFormHandler = f => {
 	const [form, setForm] = useState(f);
 
@@ -137,7 +155,7 @@ const useFormHandler = f => {
 }
 
 const FormDisplay = props => {
-	const { classes, displaySetter } = props;
+	const { classes, displaySetter, type } = props;
 	const titles = Object.keys(Form);
 	const Pemohon = useFormHandler(Form[titles[0]]);
 	const Penjamin = useFormHandler(Form[titles[1]]);
@@ -160,12 +178,19 @@ const FormDisplay = props => {
 			</Grid>
 			<Grid item xs={12} container direction="row" className={classes.formcontent}>
 				<VerticalSpacer height="25" />
-				<Grid item xs={12} className={classes.formreturn}>
-					<IconButton className={classes.iconbtn} onClick={returnToInfo}>
-						<Tooltip title="Kembali ke info">
-							<ChevronLeft />
-						</Tooltip>
-					</IconButton>
+				<Grid item xs={12} container direction="row" className={classes.formreturn}>
+					<Grid item xs={1}>
+						<IconButton className={classes.iconbtn} onClick={returnToInfo}>
+							<Tooltip title="Kembali ke info">
+								<ChevronLeft />
+							</Tooltip>
+						</IconButton>
+					</Grid>
+					<Grid item xs={6} style={{ paddingLeft: 15 }} container alignItems="center">
+						<Typography variant="h5">
+							{type}
+						</Typography>
+					</Grid>
 				</Grid>
 				<VerticalSpacer height="25" />
 				<FormGenerator config={{ formTitle: titles[0], form: Pemohon.form, formSetter: Pemohon.changeHandler }} />
@@ -190,6 +215,7 @@ const CarDetail = props => {
 	const { classes } = props;
   const [open, setOpen] = useState(false);
   const [isForm, setIsForm] = useState(false);
+  const [type, setType] = useState('');
   const [modalStyle] = useState(getModalStyle);
   const isMatch = useRouteMatch('/car/:brand/:type');
   const location = useLocation();
@@ -210,10 +236,12 @@ const CarDetail = props => {
       onClose={handleClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
+      disableBackdropClick={true}
+      disableEscapeKeyDown={true}
     >
     	<div style={modalStyle} className={classes.paper}>
-	      { !isForm && <InfoDisplay {...props} /> }
-	      { isForm && <FormDisplay {...props} displaySetter={setIsForm} /> }
+	      { !isForm && <InfoDisplay {...props} formSetter={handleClose} displaySetter={setIsForm} typeSetter={setType} /> }
+	      { isForm && <FormDisplay {...props} displaySetter={setIsForm} type={type} /> }
       </div>
     </Modal>
   );

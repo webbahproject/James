@@ -10,7 +10,7 @@ const Footer = props => {
 	return (
 		<Grid item xs={12} container direction="row" justify="center" alignItems="flex-end" className={styles.base}>
 			<div className={styles.copyright}>
-  				<span>© 2019 Careta2U | Made by Webbah</span>
+  				<span>© 2020 MyCareta2U | Made by Webbah</span>
   			</div>
 		</Grid>
 	)

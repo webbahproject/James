@@ -26,4 +26,5 @@
 .contentText {
 	color: grey ;
 	text-align: justify;
+	margin-bottom: 25px !important;
 }
