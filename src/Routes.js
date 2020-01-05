@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import _ from 'lodash';
 import { Switch, Route, useLocation, useRouteMatch } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 import {
@@ -11,31 +12,23 @@ import {
 } from './pages';
 import styles from './css/App.module.css';
 import './css/fontface.css';
+import { Cars } from './utils/Utils';
 
 const Routes = props => {
   const location = useLocation();
-  const modalMatcher = useRouteMatch();
-  const transitions = useTransition(location, location => location.pathname, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-  });
+  const isMatch = useRouteMatch('/car/:brand/:type');
+  let background = location.state && location.state.background;
+  let car = isMatch && _.find(Cars[isMatch.params.brand], ['appender', isMatch.params.type]) || null;
 
   return (
     <div className={styles.root}>
-      {
-         transitions.map( ({ item, props, key }) => (
-          <animated.div key={key} style={props}>
-            <Navigation />
-            <Switch location={location}>
-              <Route path="/" exact render={props => <Dashboard />} />
-              <Route path="/aboutme" render={props => <AboutMe />} />
-              <Route exact path="/car/:brand" render={props => <CarInfo />} />
-              { modalMatcher && modalMatcher.isExact && <Route path="/car/:brand/:type" children={props => <CarDetail />} /> }
-            </Switch>
-          </animated.div>
-        ))
-      }
+      <Navigation />
+      <Switch location={background || location}>
+        <Route path="/" exact children={props => <Dashboard />} />
+        <Route path="/aboutme" children={props => <AboutMe />} />
+        <Route exact path="/car/:brand" children={props => <CarInfo />} />
+      </Switch>
+      { background && <Route path="/car/:brand/:type" children={props => <CarDetail car={car} />} /> }
     </div>
   )
 }

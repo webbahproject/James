@@ -1,15 +1,49 @@
 import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter } from 'react-router-dom';
+import './css/fontface.css';
+
+/* Import routes to App */
 import Routes from './Routes';
 
-const App = props => {
+const styles = theme => ({
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '0.6em'
+    },
+    '*::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(255, 255, 255,0.8)'
+    },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      outline: '1px solid slategrey'
+    }
+  }
+});
+
+const getMuiTheme = () => createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'Roboto'
+    ].join(','),
+    fontSize: 15
+  }
+});
+
+/* 
+  This is the main file to aggregate all the templates 
+  To wrap the element with another provider, wrap it in here
+*/
+
+function App() {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
-  )
+  	<MuiThemeProvider theme={getMuiTheme()}>
+	    <BrowserRouter>
+	      <Routes />
+	    </BrowserRouter>
+	  </MuiThemeProvider>
+  );
 }
 
-export default App;
+export default withStyles(styles)(App);

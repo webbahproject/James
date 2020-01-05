@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import isEqual from 'react-fast-compare';
@@ -120,7 +121,11 @@ class Simple3DCarousel extends React.Component {
 		proactiveSlide.class = 'slider-single proactive';
 
 		// Make only active slide clickable
-		activeSlide.element = <img key={activeSlide.obj.title} alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} onClick={() => this.goToDetails(activeSlide.obj.appender) } />;
+		activeSlide.element = (
+			<Link key={activeSlide.obj.title} to={{ pathname: '/car/' + activeSlide.obj.brand + '/' + activeSlide.obj.appender, state: { background: this.props.path } }}>
+				<img alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} />
+			</Link>
+		);
 
 		this.setState((prevState, props) => {
 		  return { slides : slide, slideCurrent}
@@ -177,7 +182,11 @@ class Simple3DCarousel extends React.Component {
 		proactiveSlide.class = 'slider-single proactive';
 
 		// Make only active slide clickable
-		activeSlide.element = <img key={activeSlide.obj.title} alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} onClick={() => this.goToDetails(activeSlide.obj.appender) } />;
+		activeSlide.element = (
+			<Link key={activeSlide.obj.title} to={{ pathname: '/car/' + activeSlide.obj.brand + '/' + activeSlide.obj.appender, state: { background: this.props.path } }}>
+				<img alt={activeSlide.obj.title} src={activeSlide.obj.imgUrl} title={activeSlide.obj.title} />
+			</Link>
+		);
 
 		this.setState((prevState, props) => {
 		  return {slides:slide,slideCurrent}
@@ -196,7 +205,6 @@ class Simple3DCarousel extends React.Component {
 	}
 
 	goToDetails = key => {
-		console.log('Testing method here for goToDetails ::: ', key, this.props.history, this.props.path);
 		this.props.history.push(this.props.path + '/' + key);
 	}
 
