@@ -29,7 +29,13 @@
 	font-weight: 800 !important;
 }
 
-.title {
+.area {
 	flex-grow: 1;
 	cursor: pointer;
+	margin-top: 15px;
+}
+
+.rightjustify {
+	display: flex;
+	justify-content: flex-end;
 }

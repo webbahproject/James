@@ -6,7 +6,8 @@ import {
 import {
 	PureParagraph,
 	GridSpacer,
-	Simple3DCarousel
+	Simple3DCarousel,
+	ImageBlock
 } from './../components';
 import {
 	Footer,
@@ -16,23 +17,31 @@ import { Cars } from './../utils/Utils';
 import styles from './../css/AboutMe.module.css';
 
 const CarInfo = props => {
-	const [data, setData] = useState([]);
+	const [header, setHeader] = useState('');
+	const [slides, setSlides] = useState([]);
+	const [description, setDescription] = useState('');
+	const [promotion, setPromotion] = useState('');
 	const history = useHistory();
 	const location = useLocation();
 	const isMatch = useRouteMatch('/car/:brand');
 
 	useEffect(() => {
-		setData(isMatch && Cars[isMatch.params.brand]);
+		setHeader(isMatch && Cars[isMatch.params.brand].header);
+		setSlides(isMatch && Cars[isMatch.params.brand].slides);
+		setDescription(isMatch && Cars[isMatch.params.brand].descripton);
+		setPromotion(isMatch && Cars[isMatch.params.brand].promotion);
 	}, [isMatch]);
 
 	return (
 		<Grid container direction="row" className={styles.root}>
-			<GridSpacer height="80" />
-			{ Boolean(data.length) && <Simple3DCarousel slides={data} history={history} path={location} /> }
+			{ Boolean(header) && <ImageBlock image={header} />}
+			<GridSpacer height="30" />
+			{ Boolean(slides.length) && <Simple3DCarousel slides={slides} history={history} path={location} /> }
 			<GridSpacer height="30" />
 			<Grid item xs={12} container justify="center">
-				<PureParagraph />
+				<PureParagraph text={description} />
 			</Grid>
+			{ Boolean(promotion) && <ImageBlock image={promotion} />}
 			<CarDetail />
 			<Footer />
 		</Grid>

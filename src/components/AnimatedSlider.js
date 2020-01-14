@@ -22,7 +22,6 @@ const AnimatedSlider = props => {
 	const history = useHistory();
 
 	const goTo = url => {
-		console.log('Can i see what is url ::: ', url);
 		history.push(url);
 	}
 
@@ -39,7 +38,7 @@ const AnimatedSlider = props => {
 						<p>{item.description}</p>
 						<button className="link-button" onClick={evt => goTo(history.push(item.link))}>{item.button}</button>
 					</div>
-					<div className="slider-footer">© 2019 Careta2u | Made by Webbah</div>
+					<div className="slider-footer">© 2019 MyCareta2u | Made by Webbah</div>
 				</div>
 			))}
 		</Slider>
