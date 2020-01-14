@@ -5,6 +5,7 @@ import { Grid, Button, Modal, Typography, IconButton, Tooltip } from '@material-
 import { ChevronLeft, Close } from '@material-ui/icons';
 import { CarsPricing, Form } from './../utils/Utils';
 import { SimpleTable, VerticalSpacer, FormGenerator } from './../components';
+import YouTube from 'react-youtube';
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
@@ -100,15 +101,25 @@ const getModalStyle = () => {
   };
 }
 
+const opts = {
+  width: windowWidth > 800 ? ( windowWidth * 0.65 ) - 100 : ( windowWidth * 0.9 ) - 40,
+  playerVars: { // https://developers.google.com/youtube/player_parameters
+    autoplay: 0
+  }
+};
+
 const InfoDisplay = props => {
 	const { classes, car = {}, displaySetter, formSetter, typeSetter } = props;
-	const { imgUrl = '', appender = '', title = '', description = '' } = car; 
+  const { imgUrl = '', appender = '', title = '', description = [], youtube = '' } = car; 
 
 	const tableheader = ['Model', 'Harga', 'Deposit (10%)', 'Loan (90%)', '5 tahun', '7 tahun', '9 tahun', 'Loan penuh', ''];
 
 	const clickHandler = model => {
-		typeSetter(model);
-		displaySetter(true);
+		// typeSetter(model);
+		// displaySetter(true);
+    let text = 'Hai MyCareta2u, saya berminat untuk mengetahui lebih lanjut tentang model kereta ' + model;
+    let link = 'https://api.whatsapp.com/send?phone=60168263172&text=' + encodeURI(text);
+    window.location.href = link;
 	}
 
 	return (
@@ -130,10 +141,20 @@ const InfoDisplay = props => {
       		</Typography>
       	</Grid>
       	<Grid item xs={12} container alignItems="center">
-      		<Typography variant="body2" className={classes.description}>
-      			{description}
-      		</Typography>
+          {
+            description.map( (text, idx) => (
+              <Typography key={idx} component="p" variant="body2" className={classes.description} style={{ marginBottom: 15 }}>
+                {text}
+              </Typography>
+            ))
+          }
       	</Grid>
+        {
+          Boolean(youtube) &&
+          <Grid item xs={12} container justify="center">
+            <YouTube videoId={youtube} opts={opts} />
+          </Grid>
+        }
       	<Grid item xs={12} container justify="center" className={classes.popcontent}>
       		<SimpleTable config={{ tableheader, tablecontent: CarsPricing[appender], clickHandler }}  />
       	</Grid>

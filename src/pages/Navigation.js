@@ -65,11 +65,9 @@ const Navigation = props => {
 			  	<div className={styling.area}>
 			    	<img alt="" title="Careta2u" src="/images/MyCareta2U_Logo.png" width="120" height="auto" onClick={() => history.push('/')} />
 			    </div>
-			    <div className={`${styling.area} ${styling.rightjustify}`}>
-			    	<Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/car/proton' && styling.active } `} onClick={evt => setMenu(evt.currentTarget)}>SENARAI KERETA</Button>
-			    	<Menus open={menu} openSetter={setMenu} />
-			    </div>
-			    {/*<Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/aboutme' && styling.active } `} onClick={() => history.push('/aboutme')}>TENTANG SAYA</Button>*/}
+			    <Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/car/proton' && styling.active } `} onClick={evt => setMenu(evt.currentTarget)}>SENARAI KERETA</Button>
+			    <Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/aboutme' && styling.active } `} onClick={() => history.push('/aboutme')}>TENTANG KAMI</Button>
+			    <Menus open={menu} openSetter={setMenu} />
 			  </Toolbar>
 			</AppBar>
 		</div>

@@ -210,7 +210,7 @@ class Simple3DCarousel extends React.Component {
 
 	render() {
 		return (
-			<Grid item xs={12} container>
+			<Grid item xs={12}>
 				<div className="react-3d-carousel" style={{ height:this.state.height}}>
 					{this.state.slides && this.state.slides.length > 0 &&
 						<div className="slider-container">

@@ -7,6 +7,7 @@ import {
 	PureParagraph,
 	GridSpacer,
 	Simple3DCarousel,
+	ImageBanner,
 	ImageBlock
 } from './../components';
 import {
@@ -28,19 +29,18 @@ const CarInfo = props => {
 	useEffect(() => {
 		setHeader(isMatch && Cars[isMatch.params.brand].header);
 		setSlides(isMatch && Cars[isMatch.params.brand].slides);
-		setDescription(isMatch && Cars[isMatch.params.brand].descripton);
+		setDescription(isMatch && Cars[isMatch.params.brand].description);
 		setPromotion(isMatch && Cars[isMatch.params.brand].promotion);
 	}, [isMatch]);
 
 	return (
 		<Grid container direction="row" className={styles.root}>
-			{ Boolean(header) && <ImageBlock image={header} />}
+			{ Boolean(header) && <ImageBanner image={header} />}
+			<PureParagraph text={description} />
+			{ Boolean(slides.length) && 
+				<Simple3DCarousel slides={slides} history={history} path={location} /> 
+			}
 			<GridSpacer height="30" />
-			{ Boolean(slides.length) && <Simple3DCarousel slides={slides} history={history} path={location} /> }
-			<GridSpacer height="30" />
-			<Grid item xs={12} container justify="center">
-				<PureParagraph text={description} />
-			</Grid>
 			{ Boolean(promotion) && <ImageBlock image={promotion} />}
 			<CarDetail />
 			<Footer />

@@ -9,38 +9,58 @@ export const Cars = {
 				brand: 'proton', 
 				title: 'Proton Saga', 
 				appender: 'Saga', 
-				description: 'Jenama pertama keluaran Proton, yang juga merupakan kereta nasional pertama. Walaupun usianya menjangkau lebih 31 tahun, namun keutuhannya tetap terbukti, bersemadi di setiap jiwa pengguna kereta Proton di Malaysia.' 
+				description: [
+					'Jenama pertama keluaran Proton, yang juga merupakan kereta nasional pertama. Walaupun usianya menjangkau lebih 31 tahun, namun keutuhannya tetap terbukti, bersemadi di setiap jiwa pengguna kereta Proton di Malaysia.' 
+				],
+				youtube: ''
 			},
 			{ 
 				imgUrl: '/images/proton/Iriz.png', 
 				brand: 'proton', 
 				title: 'Proton Iriz', 
 				appender: 'Iriz', 
-				description: 'Iriz ialah supermini lima pintu yang dibangunkan oleh Proton. Ia dilancarkan pada tahun 2014 sebagai pengganti spiritual bagi Proton Savvy dan dikuasakan oleh pelbagai mesin Proton 1.3L VVT dan 1.6L VVT serba-baharu.' 
+				description: [
+					'Iriz ialah supermini lima pintu yang dibangunkan oleh Proton. Ia dilancarkan pada tahun 2014 sebagai pengganti spiritual bagi Proton Savvy dan dikuasakan oleh pelbagai mesin Proton 1.3L VVT dan 1.6L VVT serba-baharu.' 
+				],
+				youtube: ''
 			},
 			{ 
 				imgUrl: '/images/proton/Persona.png', 
 				brand: 'proton', 
 				title: 'Proton Persona', 
 				appender: 'Persona', 
-				description: 'Proton Persona menawarkan ruangan kepala yang lebih banyak, ruangan kaki yang boleh dibandingkan, dan ruangan but yang jauh lagi besar. Kereta serba baharu ini juga lebih berkuasa, lebih jimat minyak, dan lebih canggih daripada model Persona yang lama.' 
+				description: [
+					'INTELLIGENCE THAT CARES',
+					'LOOK GOOD, FEEL BETTER. IT’S WHAT INSIDE THAT COUNTS. THREE CHEERS TO CONVIENCE AND COMFORT WITH SAFETY, INSIDE AND OUT.',
+					'Equipped with intelligence that Cares, the PERSONA is a stunner to look at with a championing interior to match. With new exterior and interior design features the PERSONA also provides a fuel efficient drive while looking good on the road..',
+					'Begin your journey with a sight to behold. Personalise your entertainment modules and conveniently manoeuvre your way around town. Explore these features that scream fun in your hands...',
+					'Get comfortable in motion. Drive in confidence in the PERSONA and you’ll be bound to have a good time on the road with these top-notch features…',
+					'Safety first at all times, the PERSONA variants are rated 5-Star in the ASEAN NCAP. With solid features and credible ratings, get ready for greater milestones.'
+				],
+				youtube: 'AMG8TxV_sXA'
 			},
 			{ 
 				imgUrl: '/images/proton/Exora.png', 
 				brand: 'proton', 
 				title: 'Proton Exora', 
 				appender: 'Exora', 
-				description: '	Diwarkan sebagai kereta MPV pertama buatan anak tempatan di Malaysia, Proton Exora merupakan kereta dengan ruang bersaiz besar yang sememangnya sesuai untuk kegunaan keluarga. Dijana oleh enjin berkuasa tinggi, Proton Exora merupakan pilihan tepat bagi mereka yang perlukan kereta dengan kapasiti ruang yang besar untuk pelbagai gunaan.' 
+				description: [
+					'Diwarkan sebagai kereta MPV pertama buatan anak tempatan di Malaysia, Proton Exora merupakan kereta dengan ruang bersaiz besar yang sememangnya sesuai untuk kegunaan keluarga. Dijana oleh enjin berkuasa tinggi, Proton Exora merupakan pilihan tepat bagi mereka yang perlukan kereta dengan kapasiti ruang yang besar untuk pelbagai gunaan.' 
+				],
+				youtube: '' 
 			},
 			{ 
 				imgUrl: '/images/proton/X70.jpg', 
 				brand: 'proton', 
 				title: 'Proton X70', 
 				appender: 'X70', 
-				description: 'Diwarkan sebagai kereta SUV mewah pertama keluaran tempatan, Proton X70 membawa pengalaman memandu anda ke alaf yang lebih tinggi, dan pada harga yang terrendah berbanding dengan kereta-kereta SUV lain di dalam kategori yang sama' 
+				description: [
+					'Diwarkan sebagai kereta SUV mewah pertama keluaran tempatan, Proton X70 membawa pengalaman memandu anda ke alaf yang lebih tinggi, dan pada harga yang terrendah berbanding dengan kereta-kereta SUV lain di dalam kategori yang sama' 
+				],
+				youtube: ''
 			}
 		],
-		description: 'Proton description should be in here',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 		promotion: '/images/proton/Promotion.png'
 	}
 };

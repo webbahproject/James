@@ -53,16 +53,16 @@ const SimpleTable = props => {
             Boolean(tablecontent.length) && tablecontent.map(row => (
               <TableRow key={row.id} className={classes.tablerow}>
                 {
-                  (row.tablecells).map(cell => {
+                  (row.tablecells).map( (cell, idx) => {
                     switch(typeof cell){
                       case 'string':
                       return (
-                        <TableCell className={classes.tablebodycell}>{cell}</TableCell> 
+                        <TableCell key={idx} className={classes.tablebodycell}>{cell}</TableCell> 
                       );
 
                       case 'object':
                       return (
-                        <TableCell className={classes.tablebodycell}>
+                        <TableCell key={idx} className={classes.tablebodycell}>
                           <Button variant="contained" color="secondary" onClick={evt => clickHandler(cell.type)}>Mohon!</Button>
                         </TableCell> 
                       );

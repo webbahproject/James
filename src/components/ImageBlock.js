@@ -1,26 +1,19 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import {
 	Grid
 } from '@material-ui/core';
-
-const styles = theme => ({
-	background: {
-		backgroundSize:'cover',
-		backgroundPosition: 'center center',
-		backgroundRepeat: 'no-repeat',
-		height: 'auto'
-	}
-});
+import {} from '.';
 
 const ImageBlock = props => {
-	const { classes, image = '' } = props;
+	const { image } = props;
 
 	return (
-		<Grid item xs={12}>
-			<div className={classes.background} style={{ backgroundImage: 'url('+ image +')' }} />
+		<Grid item xs={12} container direction="row" justify="center">
+			<Grid item xs={10} container justify="center">
+				<img alt="" src={image} width="100%" height="auto" />
+			</Grid>
 		</Grid>
-	);
+	)
 }
 
-export default withStyles(styles)(ImageBlock);
+export default ImageBlock;

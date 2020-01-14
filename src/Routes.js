@@ -16,7 +16,7 @@ const Routes = props => {
   const location = useLocation();
   const isMatch = useRouteMatch('/car/:brand/:type');
   let background = location.state && location.state.background;
-  let car = ( isMatch && _.find(Cars[isMatch.params.brand], ['appender', isMatch.params.type]) ) || null;
+  let car = ( isMatch && _.find(Cars[isMatch.params.brand].slides, ['appender', isMatch.params.type]) ) || null;
 
   return (
     <div className={styles.root}>
