@@ -37,11 +37,11 @@ const CarInfo = props => {
 		<Grid container direction="row" className={styles.root}>
 			{ Boolean(header) && <ImageBanner image={header} />}
 			<PureParagraph text={description} />
+			{ Boolean(promotion) && <ImageBlock image={promotion} />}
+			<GridSpacer height="50" />
 			{ Boolean(slides.length) && 
 				<Simple3DCarousel slides={slides} history={history} path={location} /> 
 			}
-			<GridSpacer height="30" />
-			{ Boolean(promotion) && <ImageBlock image={promotion} />}
 			<CarDetail />
 			<Footer />
 		</Grid>
