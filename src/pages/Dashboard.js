@@ -7,7 +7,7 @@ import {
 } from './../components';
 import styles from './../css/Dashboard.module.css';
 
-const Header = props => {
+const Dashboard = props => {
 
 	return (
 		<Grid container direction="row" className={styles.root}>
@@ -18,4 +18,4 @@ const Header = props => {
 	)
 }
 
-export default Header;
+export default Dashboard;

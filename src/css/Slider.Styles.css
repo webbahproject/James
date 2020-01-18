@@ -52,12 +52,14 @@ button:hover {
 
 .slider-wrapper {
   position: relative;
-  height: 100vh;
+  height: 100vh !important;
+  width: 100%;
   overflow: hidden;
 }
 
 .slide {
-  height: 100vh;
+  width: 100%;
+  height: 100vh !important;
   background-size: cover !important;
   display: flex;
 }
