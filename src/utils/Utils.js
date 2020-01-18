@@ -1,12 +1,23 @@
 /* List out all utilities and constants in here */
 
+export const ViewType = {
+	desktop: window.innerWidth >= 1200,
+	tab: window.innerWidth >= 768 && window.innerWidth < 1200,
+	mobile: window.innerWidth >= 375 && window.innerWidth < 768,
+	smallmobile: window.innerWidth < 375  
+}
+
+export const CarLogos = {
+	proton: '/images/proton/ProtonLogo.png'
+}
+
 export const Cars = {
 	'proton': {
 		header: '/images/proton/All_Models.png',
 		slides: [
 			{ 
 				imgUrl: '/images/proton/Saga.png', 
-				brand: 'proton', 
+				brand: 'proton',
 				title: 'Proton Saga', 
 				appender: 'Saga', 
 				description: [

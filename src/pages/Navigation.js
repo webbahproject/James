@@ -1,16 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import { 
-	AppBar, Toolbar, Button, Menu, MenuItem
+	AppBar, Toolbar, Button, Menu, MenuItem, IconButton, Divider, ListItemIcon
 } from '@material-ui/core';
+import { Dehaze } from '@material-ui/icons';
+import { ViewType, CarLogos } from './../utils/Utils';
 import styling from './../css/Navigation.module.css';
 
 const menuStyles = theme => ({
 	menu: {
 		paddingTop: 0,
 		paddingBottom: 0,
-		width: 150
+		width: ( ViewType.desktop || ViewType.tab ) && 200 || 150,
+		minHeight: ( ViewType.mobile || ViewType.smallmobile ) && 35 || 42
+	},
+	burger: {
+		color: '#FFD800'
 	}
 });
 
@@ -21,7 +27,6 @@ const CarMenu = [
 const Menus = withStyles(menuStyles)(props => {
 	const { classes, open, openSetter } = props;
 	const history = useHistory();
-
 	const handleClose = useCallback(() => openSetter(null));
 
 	const goTo = path => {
@@ -44,16 +49,46 @@ const Menus = withStyles(menuStyles)(props => {
 	      horizontal: 'center',
 	    }}
 		>
-			{ CarMenu.map( car => 
+			{ 
+				( ViewType.desktop || ViewType.tab ) && 
+				CarMenu.map( car => 
 				<MenuItem key={car.brand} className={classes.menu} onClick={() => goTo(car.url)}>
+					<ListItemIcon>
+	          <img alt="" src={CarLogos[(car.brand).toLowerCase()]} width="40" height="auto" />
+	        </ListItemIcon>
 					{ car.brand }
 				</MenuItem> 
 			)}
+			{ 
+				( ViewType.mobile || ViewType.smallmobile ) && 
+				[
+					CarMenu.map( car => 
+							<MenuItem key={car.brand} className={classes.menu} onClick={() => goTo(car.url)}>
+								<ListItemIcon>
+			            <img alt="" src={CarLogos[(car.brand).toLowerCase()]} width="30" height="auto" />
+			          </ListItemIcon>
+								{ car.brand }
+							</MenuItem>
+					),
+					<Divider />,
+					<MenuItem key='tentang_kami' className={classes.menu} onClick={() => goTo('/aboutme')}>
+						{ 'Tentang Kami' }
+					</MenuItem>
+				]
+			}
 		</Menu>
 	);
 });
 
+const mainStyles = theme => ({
+	burger: {
+		color: '#FFD800',
+		cursor: 'pointer'
+	}
+});
+
 const Navigation = props => {
+	const { classes } = props;
 	const history = useHistory();
 	const location = useLocation();
 	const [menu, setMenu] = useState(null);
@@ -63,15 +98,36 @@ const Navigation = props => {
 			<AppBar position="fixed" className={styling.header}>
 			  <Toolbar variant="dense">
 			  	<div className={styling.area}>
-			    	<img alt="" title="Careta2u" src="/images/MyCareta2U_Logo.png" width="120" height="auto" onClick={() => history.push('/')} />
+			    	<img 
+			    		alt="" 
+			    		title="Careta2u" 
+			    		src="/images/MyCareta2U_Logo.png" 
+			    		width={ ( ViewType.desktop || ViewType.tab ) && 120 || 90 } 
+			    		height="auto" 
+			    		onClick={() => history.push('/')} 
+			    />
 			    </div>
-			    <Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/car/proton' && styling.active } `} onClick={evt => setMenu(evt.currentTarget)}>SENARAI KERETA</Button>
-			    <Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/aboutme' && styling.active } `} onClick={() => history.push('/aboutme')}>TENTANG KAMI</Button>
-			    <Menus open={menu} openSetter={setMenu} />
+			    {
+			    	( ViewType.desktop || ViewType.tab ) &&
+			    	<Fragment>
+				    	<Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/car/proton' && styling.active } `} onClick={evt => setMenu(evt.currentTarget)}>SENARAI KERETA</Button>
+					    <Button color="inherit" className={` ${styling.menu} ${ location.pathname === '/aboutme' && styling.active } `} onClick={() => history.push('/aboutme')}>TENTANG KAMI</Button>
+					    <Menus open={menu} openSetter={setMenu} />
+			    	</Fragment>
+			    }
+			    {
+			    	( ViewType.mobile || ViewType.smallmobile ) &&
+			    	<div className={`${styling.area} ${styling.rightjustify}`}>
+			    		<IconButton className={classes.burger} onClick={evt => setMenu(evt.currentTarget)}>
+			    			<Dehaze />
+			    		</IconButton>
+			    		<Menus open={menu} openSetter={setMenu} />
+			    	</div>
+			    }
 			  </Toolbar>
 			</AppBar>
 		</div>
 	)
 }
 
-export default Navigation;
+export default withStyles(mainStyles)(Navigation);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter } from 'react-router-dom';
+import { ViewType } from './utils/Utils';
 import './css/fontface.css';
 
 /* Import routes to App */
@@ -27,7 +28,7 @@ const getMuiTheme = () => createMuiTheme({
       'Open Sans',
       'Roboto'
     ].join(','),
-    fontSize: 15
+    fontSize: ( ViewType.desktop || ViewType.tab ) && 15 || 11
   }
 });
 
