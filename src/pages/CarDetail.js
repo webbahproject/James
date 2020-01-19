@@ -3,7 +3,7 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Button, Modal, Typography, IconButton, Tooltip } from '@material-ui/core';
 import { ChevronLeft, Close } from '@material-ui/icons';
-import { CarsPricing, Form } from './../utils/Utils';
+import { CarsPricing, Form, ViewType } from './../utils/Utils';
 import { SimpleTable, VerticalSpacer, FormGenerator } from './../components';
 import YouTube from 'react-youtube';
 
@@ -27,7 +27,7 @@ const styles = theme => ({
   	paddingBottom: 20
   },
   content: {
-  	maxHeight: 400, 
+  	maxHeight: (( ViewType.desktop || ViewType.tab ) && 400 ) || 420, 
   	overflowY: 'scroll',
   	paddingLeft: '7%',
   	paddingRight: '7%'
@@ -125,7 +125,7 @@ const InfoDisplay = props => {
 	return (
 		<Grid container direction="row">
     	<Grid item xs={12}>
-    		<div style={{ position: 'relative', backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: 200, width: '100%' }}>
+    		<div style={{ position: 'relative', backgroundImage: 'url(' + imgUrl + ')', backgroundSize: 'cover', height: (( ViewType.desktop || ViewType.tab ) && 200) || 130, width: '100%' }}>
     			<IconButton className={` ${classes.iconbtn} ${classes.topright} `} onClick={formSetter}>
 						<Tooltip title="Tutup popper">
 							<Close style={{ fontSize: 12 }} />
@@ -156,9 +156,13 @@ const InfoDisplay = props => {
           </Grid>
         }
       	<Grid item xs={12} container justify="center" className={classes.popcontent}>
-      		<SimpleTable config={{ tableheader, tablecontent: CarsPricing[appender], clickHandler }}  />
+          <SimpleTable config={{ tableheader, tablecontent: CarsPricing[appender], clickHandler }}  />
       	</Grid>
     	</Grid>
+      {
+        ( ViewType.desktop || ViewType.tab ) &&
+        <VerticalSpacer height="40" />
+      }
     </Grid>
 	);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Fragment } from 'react';
+import React, { useState, useCallback, Fragment, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import { 
@@ -12,8 +12,8 @@ const menuStyles = theme => ({
 	menu: {
 		paddingTop: 0,
 		paddingBottom: 0,
-		width: ( ViewType.desktop || ViewType.tab ) && 200 || 150,
-		minHeight: ( ViewType.mobile || ViewType.smallmobile ) && 35 || 42
+		width: (( ViewType.desktop || ViewType.tab ) && 200) || 150,
+		minHeight: (( ViewType.mobile || ViewType.smallmobile ) && 35) || 42
 	},
 	burger: {
 		color: '#FFD800'
@@ -81,6 +81,25 @@ const Menus = withStyles(menuStyles)(props => {
 });
 
 const mainStyles = theme => ({
+	headertransparent: {
+		backgroundColor: 'transparent',
+		boxShadow: 'none'
+	}, 
+	headerbg: {
+		backgroundColor: '#141414',
+		boxShadow: 'none'
+	},
+	pad: {
+		padding: '10px 0 10px 20px'
+	},
+	area: {
+		flexGrow: 1,
+		cursor: 'pointer',
+	},
+	rightjustify: {
+		display: 'flex',
+		justifyContent: 'flex-end'
+	},
 	burger: {
 		color: '#FFD800',
 		cursor: 'pointer'
@@ -92,12 +111,24 @@ const Navigation = props => {
 	const history = useHistory();
 	const location = useLocation();
 	const [menu, setMenu] = useState(null);
+	const [show, setShow] = useState(false);
+
+	useEffect(() => {
+    const onScroll = () => {
+      setShow( window.scrollY > 100 ? true : false );
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [ window.scrollY ]);
 
 	return (
 		<div className={styling.root}>
-			<AppBar position="fixed" className={styling.header}>
-			  <Toolbar variant="dense">
-			  	<div className={styling.area}>
+			<AppBar position="fixed" className={show ? classes.headerbg : classes.headertransparent}>
+			  <Toolbar variant="dense" className={classes.pad}>
+			  	<div className={classes.area}>
 			    	<img 
 			    		alt="" 
 			    		title="Careta2u" 
@@ -117,7 +148,7 @@ const Navigation = props => {
 			    }
 			    {
 			    	( ViewType.mobile || ViewType.smallmobile ) &&
-			    	<div className={`${styling.area} ${styling.rightjustify}`}>
+			    	<div className={`${classes.area} ${classes.rightjustify}`}>
 			    		<IconButton className={classes.burger} onClick={evt => setMenu(evt.currentTarget)}>
 			    			<Dehaze />
 			    		</IconButton>
