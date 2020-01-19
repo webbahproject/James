@@ -28,7 +28,7 @@ const getMuiTheme = () => createMuiTheme({
       'Open Sans',
       'Roboto'
     ].join(','),
-    fontSize: ( ViewType.desktop || ViewType.tab ) && 15 || 11
+    fontSize: (( ViewType.desktop || ViewType.tab ) && 15) || 11
   }
 });
 

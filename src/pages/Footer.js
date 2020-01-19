@@ -9,7 +9,7 @@ import styles from './../css/Footer.module.css';
 const componentStyles = theme => ({
 	copyright: {
 		color: 'rgba(255, 255, 255, 0.7)',
-		fontSize: ( ViewType.desktop || ViewType.tab ) && '1rem' || '0.8rem',
+		fontSize: (( ViewType.desktop || ViewType.tab ) && '1rem') || '0.8rem',
 	  marginTop: 60,
 	  fontFamily:  'Roboto'
 	}

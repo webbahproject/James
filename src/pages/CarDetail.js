@@ -109,7 +109,7 @@ const opts = {
 };
 
 const InfoDisplay = props => {
-	const { classes, car = {}, displaySetter, formSetter, typeSetter } = props;
+	const { classes, car = {}, formSetter } = props;
   const { imgUrl = '', appender = '', title = '', description = [], youtube = '' } = car; 
 
 	const tableheader = ['Model', 'Harga', 'Deposit (10%)', 'Loan (90%)', '5 tahun', '7 tahun', '9 tahun', 'Loan penuh', ''];

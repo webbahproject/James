@@ -43,7 +43,7 @@ const SimpleTable = props => {
           <TableRow className={classes.tablerow}>
             {
               tableheader.map(header => (
-                <TableCell className={classes.tableheadcell}>{header}</TableCell>
+                <TableCell key={'header--' + header}className={classes.tableheadcell}>{header}</TableCell>
               ))
             }
           </TableRow>

@@ -48,38 +48,38 @@ class Simple3DCarousel extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-	  if(prevProps.slides && prevProps.slides[0] && this.props.slides[0]){
-		if(!isEqual(prevProps.slides[0], this.props.slides[0])){
-		  let slides = [];
-		  this.props.slides.forEach((slide) => {
-			  let slideobject = {
-				  class:"slider-single proactivede",
-				  obj: slide
-			  }
-			  slides.push(slideobject);
-		  });
-		  this.setState((prevState, props) => {
-			  return {
-				slides,
-			  slideTotal:this.props.slides.length-1,
-			  slideCurrent : -1}
-		  });
-		  this.setState((prevState, props) => {
-			  return {...prevState}
-		  });
-		  setTimeout(()=> {
-			  this.slideRight();
-
-			  // console.log('Let me check in here inside componentDidUpdate :: ', document.getElementsByClassName("slider-single")[0].clientHeight + 'px');
-
+	  if( Boolean(prevProps.slides.length) ){
+			if(!isEqual(prevProps.slides[0], this.props.slides[0])){
+			  let slides = [];
+			  this.props.slides.forEach((slide) => {
+				  let slideobject = {
+					  class:"slider-single proactivede",
+					  obj: slide
+				  }
+				  slides.push(slideobject);
+			  });
 			  this.setState((prevState, props) => {
-				  return { 
-				  	...this.state, 
-						height: document.getElementsByClassName("slider-single")[0].clientHeight + 'px'
-				}});
-			  // height && document.getElementsByClassName("slider-single")[0].clientHeight;
-		  }, 500);
-		}
+				  return {
+					slides,
+				  slideTotal:this.props.slides.length-1,
+				  slideCurrent : -1}
+			  });
+			  this.setState((prevState, props) => {
+				  return {...prevState}
+			  });
+			  setTimeout(()=> {
+				  this.slideRight();
+
+				  // console.log('Let me check in here inside componentDidUpdate :: ', document.getElementsByClassName("slider-single")[0].clientHeight + 'px');
+
+				  this.setState((prevState, props) => {
+					  return { 
+					  	...this.state, 
+							height: document.getElementsByClassName("slider-single")[0].clientHeight + 'px'
+					}});
+				  // height && document.getElementsByClassName("slider-single")[0].clientHeight;
+			  }, 500);
+			}
 	  }
 	}
 

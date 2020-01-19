@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Fragment, useEffect } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from 'react-router-dom';
 import { 
@@ -27,7 +27,7 @@ const CarMenu = [
 const Menus = withStyles(menuStyles)(props => {
 	const { classes, open, openSetter } = props;
 	const history = useHistory();
-	const handleClose = useCallback(() => openSetter(null));
+	const handleClose = openSetter(null);
 
 	const goTo = path => {
 		history.push(path);
@@ -70,7 +70,7 @@ const Menus = withStyles(menuStyles)(props => {
 								{ car.brand }
 							</MenuItem>
 					),
-					<Divider />,
+					<Divider key="divider" />,
 					<MenuItem key='tentang_kami' className={classes.menu} onClick={() => goTo('/aboutme')}>
 						{ 'Tentang Kami' }
 					</MenuItem>
@@ -119,10 +119,9 @@ const Navigation = props => {
     };
 
     window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [ window.scrollY ]);
+    return () => window.removeEventListener("scroll", onScroll);
+    
+  }, []);
 
 	return (
 		<div className={styling.root}>
@@ -133,7 +132,7 @@ const Navigation = props => {
 			    		alt="" 
 			    		title="Careta2u" 
 			    		src="/images/MyCareta2U_Logo.png" 
-			    		width={ ( ViewType.desktop || ViewType.tab ) && 120 || 90 } 
+			    		width={ (( ViewType.desktop || ViewType.tab ) && 120) || 90 } 
 			    		height="auto" 
 			    		onClick={() => history.push('/')} 
 			    />
