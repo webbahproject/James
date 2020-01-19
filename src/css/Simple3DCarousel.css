@@ -22,7 +22,7 @@
  .react-3d-carousel {
 	position: relative;
 	width: 100%;
-	min-height: 350px;
+	min-height: 100px;
 }
  .react-3d-carousel .slider-container {
 	 position: absolute;

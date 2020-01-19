@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import isEqual from 'react-fast-compare';
+import { ViewType } from './../utils/Utils';
 import './../css/Simple3DCarousel.css';
 
 class Simple3DCarousel extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			slideTotal:0,
+			slideTotal: 0,
 			slideCurrent : -1,
 			slides:[],
 			height:"0px"
