@@ -21,7 +21,10 @@ const menuStyles = theme => ({
 });
 
 const CarMenu = [
-	{ brand: 'Proton', url: '/car/proton' }
+	{ brand: 'Proton', url: '/car/proton' },
+	{ brand: 'Perodua', url: '/car/perodua' },
+	{ brand: 'Toyota', url: '/car/toyota' },
+	{ brand: 'Isuzu', url: '/car/isuzu' }
 ];
 
 const Menus = withStyles(menuStyles)(props => {

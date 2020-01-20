@@ -8,7 +8,10 @@ export const ViewType = {
 }
 
 export const CarLogos = {
-	proton: '/images/proton/ProtonLogo.png'
+	proton: '/images/proton/ProtonLogo.png',
+	perodua: '/images/perodua/PeroduaLogo.png',
+	toyota: '/images/toyota/ToyotaLogo.png',
+	isuzu: '/images/isuzu/IsuzuLogo.png',
 }
 
 export const Cars = {
