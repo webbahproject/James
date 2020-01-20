@@ -13,7 +13,7 @@ const menuStyles = theme => ({
 		paddingTop: 0,
 		paddingBottom: 0,
 		width: (( ViewType.desktop || ViewType.tab ) && 200) || 150,
-		minHeight: (( ViewType.mobile || ViewType.smallmobile ) && 35) || 42
+		minHeight: (( ViewType.mobile || ViewType.smallmobile ) && 30) || 35
 	},
 	burger: {
 		color: '#FFD800'
@@ -27,7 +27,7 @@ const CarMenu = [
 const Menus = withStyles(menuStyles)(props => {
 	const { classes, open, openSetter } = props;
 	const history = useHistory();
-	const handleClose = openSetter(null);
+	const handleClose = () => openSetter(null);
 
 	const goTo = path => {
 		history.push(path);
